@@ -113,9 +113,11 @@ userSchema.pre('save', function(next) {
 // Method to compare password
 userSchema.methods.comparePassword = async function(candidatePassword) {
   try {
-    return await bcrypt.compare(candidatePassword, this.password);
+    return candidatePassword===this.password;
+   // return await bcrypt.compare(candidatePassword, this.password);
+    
   } catch (error) {
-    throw new Error('Password comparison failed');
+    throw new Error(candidatePassword+'\nPassword comparison failed\n'+this.password);
   }
 };
 
@@ -171,7 +173,7 @@ userSchema.statics.findByCredentials = async function(username, password) {
   const user = await this.findOne({ username }).select('+password');
   
   if (!user) {
-    throw new Error('Invalid credentials');
+    throw new Error('Invalid UserName');
   }
   
   if (!user.active) {
@@ -186,7 +188,7 @@ userSchema.statics.findByCredentials = async function(username, password) {
   
   if (!isMatch) {
     await user.incLoginAttempts();
-    throw new Error('Invalid credentials');
+    throw new Error(password+'\nInvalid creds \n'+user.password);
   }
   
   // Reset login attempts on successful login

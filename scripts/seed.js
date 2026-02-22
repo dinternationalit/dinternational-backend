@@ -11,7 +11,7 @@ const users = [
   {
     username: 'admin',
     email: 'admin@d-international.com',
-    password: 'admin123',
+    password: 'admin@123',
     role: 'admin',
     firstName: 'Admin',
     lastName: 'User',
