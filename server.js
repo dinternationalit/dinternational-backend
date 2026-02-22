@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -9,6 +11,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload({
+  limits: {
+    fileSize: Number(process.env.MAX_FILE_SIZE) || 10 * 1024 * 1024
+  },
+  abortOnLimit: true,
+  createParentPath: true,
+  preserveExtension: true,
+  safeFileNames: true
+}));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/dinternational', {
