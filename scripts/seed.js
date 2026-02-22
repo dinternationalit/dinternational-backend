@@ -21,7 +21,7 @@ const users = [
 
 const categories = [
   { _id: 'office', name: 'Office Furniture', icon: '🏢', description: 'Professional office furniture and equipment' },
-  { _id: 'home', name: 'Home Furniture', icon: '🏠', description: 'Comfortable furniture for your home' },
+  { _id: 'home', name: 'Home Furniture1', icon: '🏠', description: 'Comfortable furniture for your home' },
   { _id: 'outdoor', name: 'Outdoor', icon: '🌳', description: 'Weather-resistant outdoor furniture' },
   { _id: 'fixtures', name: 'Fixtures', icon: '💡', description: 'Lighting and electrical fixtures' },
   { _id: 'storage', name: 'Storage', icon: '📦', description: 'Storage solutions and organizers' }
